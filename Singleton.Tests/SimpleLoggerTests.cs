@@ -48,9 +48,9 @@ public class Log
     public void ShouldBeThreadSafe()
     {
         var logger = SimpleLogger.Instance;
-        var expectedLogsCount = logger.Logs.Count + 999;
+        var expectedLogsCount = logger.Logs.Count + 1000;
 
-        Parallel.For(0, 999, _ => logger.Log(DateTime.Now.ToString()));
+        Parallel.For(0, 1000, index => logger.Log(DateTime.Now.ToString()));
 
         Assert.That(logger.Logs, Has.Count.EqualTo(expectedLogsCount));
     }

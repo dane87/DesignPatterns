@@ -1,5 +1,7 @@
 ﻿using Prototype;
 
+// Clone
+// Shallow copy
 Computer officeComputer = new();
 officeComputer.Storage.Add("SSD");
 officeComputer.OperatingSystem = new Prototype.OperatingSystem { Name = "Windows", Version = "11" };
@@ -15,17 +17,19 @@ Console.WriteLine(homeComputer.OperatingSystem!.Name); // Linux
 
 Console.WriteLine();
 
+// DeepClone
+// Deep copy
 Computer gamingComputer = new();
 gamingComputer.Storage.Add("SSD");
 gamingComputer.OperatingSystem = new Prototype.OperatingSystem { Name = "Windows", Version = "11" };
 
-Computer onlyFansComputer = gamingComputer.DeepClone();
-onlyFansComputer.OperatingSystem!.Name = "Linux";
-onlyFansComputer.Storage.Add("HDD");
+Computer homeServerComputer = gamingComputer.DeepClone();
+homeServerComputer.OperatingSystem!.Name = "Linux";
+homeServerComputer.Storage.Add("HDD");
 
 Console.WriteLine(gamingComputer.Storage.Count); // 1
-Console.WriteLine(onlyFansComputer.Storage.Count); // 2
+Console.WriteLine(homeServerComputer.Storage.Count); // 2
 Console.WriteLine(gamingComputer.OperatingSystem!.Name); // Linux
-Console.WriteLine(onlyFansComputer.OperatingSystem!.Name); // Linux
+Console.WriteLine(homeServerComputer.OperatingSystem!.Name); // Linux
 
 Console.WriteLine();
