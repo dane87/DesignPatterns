@@ -38,6 +38,7 @@ public sealed class Computer : IClonable<Computer>//, IComputer
     public string? Monitor { get; set; }
     public string? Keyboard { get; set; }
     public string? Mouse { get; set; }
+
     public OperatingSystem OperatingSystem { get; set; } = new OperatingSystem();
 
     public Computer Clone()

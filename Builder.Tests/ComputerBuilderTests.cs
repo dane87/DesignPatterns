@@ -1,4 +1,5 @@
 using Builder;
+using Newtonsoft.Json;
 
 namespace ComputerBuilderTests;
 
@@ -141,18 +142,22 @@ public class Build
     {
         var computerBuilder = new ComputerBuilder();
 
-        var expectedProcesser = "i7";
-        var expectedGraphicsCard = "2080";
+        var expectedComputer = new Computer
+        {
+            Processor = "i7",
+            GraphicsCard = "2080"
+        };
 
         var computer = computerBuilder
-            .WithProcessor(expectedProcesser)
-            .WithGraphicsCard(expectedGraphicsCard)
+            .WithProcessor(expectedComputer.Processor)
+            .WithGraphicsCard(expectedComputer.GraphicsCard)
             .Build();
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(computer.Processor, Is.EqualTo(expectedProcesser));
-            Assert.That(computer.GraphicsCard, Is.EqualTo(expectedGraphicsCard));
-        });
+        Assert.That(Serialize(computer), Is.EqualTo(Serialize(expectedComputer)));
+    }
+
+    private static string Serialize(Computer computer)
+    {
+        return JsonConvert.SerializeObject(computer);
     }
 }
